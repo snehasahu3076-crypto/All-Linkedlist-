@@ -1,27 +1,32 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
+
 struct node {
     int data;
     struct node* next;
 };
+
 struct node *start = NULL;
 struct node *ptr = NULL;
 int val;
+
 void display() {
     ptr = start;
     while (ptr != NULL) {
         cout << ptr->data << "->";
         ptr = ptr->next;
     }
-    cout << "NULL";
+    cout << "NULL\n";
 }
+
 void createnode() {
     cout << "Input value to insert: ";
     cin >> val;
     struct node* newnode = (struct node*)malloc(sizeof(struct node));
     newnode->data = val;
     newnode->next = NULL;
+    
     if (start == NULL) {
         start = newnode;
     } else {
@@ -32,8 +37,9 @@ void createnode() {
         ptr->next = newnode;
     }
 }
+
 void createnodebeg() {
-    cout << "Input value to insert: ";
+    cout << "Input value to insert at beginning: ";
     cin >> val;
     struct node* newnode = (struct node*)malloc(sizeof(struct node));
     newnode->data = val;
@@ -45,13 +51,20 @@ int main() {
     int n;
     cout << "Number of nodes: ";
     cin >> n;
+    
     for (int i = 0; i < n; i++) {
         createnode();
     }
-    cout << "Existing linked list is: ";
+    
+    cout << "\nExisting linked list is: ";
     display();
+    
     cout << "\nNow inserting a new value at first:\n";
     createnodebeg();
+    
+    cout << "Updated linked list is: ";
+    display();
+    
     cout << "\nFreeing memory...\n";
     ptr = start;
     while (ptr != NULL) {
@@ -60,5 +73,6 @@ int main() {
         ptr = nextnode;
     }
     start = NULL;
+    
     return 0;
 }
